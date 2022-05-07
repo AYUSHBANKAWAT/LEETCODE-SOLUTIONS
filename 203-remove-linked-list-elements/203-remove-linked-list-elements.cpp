@@ -11,26 +11,21 @@
 class Solution {
 public:
     ListNode* removeElements(ListNode* head, int val) {
-        queue<int>s;
-        ListNode* p = head;
-        while(p!=nullptr){
-            if( p->val!=val)
-            s.push(p->val);
-            p=p->next;
+        ListNode * q = head;
+        ListNode * p = new ListNode();
+        ListNode * newhead = p;
+        p->next = q;
+        while( q!=nullptr){
+            if( q->val == val ){
+                p->next=q->next;
+                q=q->next;
+            }else{
+                p=q;
+                q=q->next;
+            }
+                       
         }
-        p = head;
-        ListNode* temp;
-        if( s.empty() )return nullptr;
-        while( !s.empty() ){
-            temp = p;
-            p->val = s.front();
-            s.pop();
-            p=p->next;
-        }
-        if( temp != nullptr )
-        temp->next=nullptr;
-        //p= nullptr;
-        
-        return head;
+         return newhead->next;
+
     }
 };
