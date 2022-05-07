@@ -24,13 +24,13 @@ public:
                         temp[3]=nums[right];
                         ans.push_back(temp);
                         
-                        while(left<right && nums[left]==temp[2])++left;
-                        while(left<right && nums[right]==temp[3])--right; 
+                        while(left<right && nums[left]==temp[2])left++;
+                        while(left<right && nums[right]==temp[3])right--; 
                     }
                 }
-                while( j+1<n && nums[j]==nums[j+1] )++j;
+                while( j+1<n && nums[j]==nums[j+1] )j++;
             }
-            while( i+1<n && nums[i]==nums[i+1] )++i;
+            while( i+1<n && nums[i]==nums[i+1] )i++;
         }
         return ans;
     }
