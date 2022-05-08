@@ -10,24 +10,26 @@ using namespace std;
 
 class Solution{
     public:
-    int maxLen(vector<int>&nums, int n)
+    int maxLen(vector<int>&A, int n)
     {   
         // Your code here
-         unordered_map<int,int> map;
-       int sum=0;
-       int len=0;
-       map[0]=-1;
-       for(int i=0;i<n;i++){
-           sum+=nums[i];
-          
-               if(map.find(sum)!=map.end()){
-                   len=max(len,i-(int)map[sum]);
-               }
-               else{
-                   map[sum]=i;
-               }
-       }
-       return len;
+        unordered_map<int,int>mp;
+        int maxi=0;
+        int sum=0;
+        for( int i=0;i<n;i++){
+            sum+=A[i];
+            if( sum==0){
+                maxi = i+1;
+                continue;
+            }else{
+                if( mp.find(sum)!=mp.end()){
+                    maxi = max( maxi,i-mp[sum]);
+                }else{
+                    mp[sum]=i;
+                }
+            }
+        }
+        return maxi;
     }
 };
 
