@@ -37,7 +37,7 @@ class Solution
             }
             else{
                 double left = W - c; 
-                final += (arr[i].value/(double)arr[i].weight)*(double)left;
+                final += (arr[i].value/(double)arr[i].weight)*left;
                 break;
             }
         }
