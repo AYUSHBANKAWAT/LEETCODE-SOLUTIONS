@@ -17,7 +17,7 @@ class Solution
     static bool comp(meet m1,meet m2){
         if( m1.end<m2.end)return true;
         else if( m1.end>m2.end)return false;
-        else if( m1.pos<m2.pos)return true;
+        //else if( m1.pos<m2.pos)return true;
         return false;
         
     }
