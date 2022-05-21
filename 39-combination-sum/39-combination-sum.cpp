@@ -16,9 +16,9 @@ public:
             cs( arr,s,dp,t,sum+arr[index],index);
             dp.pop_back();
             cs( arr,s,dp,t,sum,index+1);
-            dp.push_back( arr[index] );
-            cs( arr,s,dp,t,sum+arr[index],index+1);
-            dp.pop_back();
+            // dp.push_back( arr[index] );
+            // cs( arr,s,dp,t,sum+arr[index],index+1);
+            // dp.pop_back();
             return;
         }
     }
