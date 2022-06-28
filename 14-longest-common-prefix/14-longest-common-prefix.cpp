@@ -5,11 +5,14 @@ public:
         
         int i=1;
         int n = strs.size();
+        int len=0;
         //if( n==1 )return s1;
         while( i<n ){
             int t=0;
             while( t<s1.size() && t<strs[i].size() && s1[t]==strs[i][t] )t++;
+            if( s1!=s1.substr(0,t) )
             s1=s1.substr(0,t);
+            
             i++;
         }
         return s1;
