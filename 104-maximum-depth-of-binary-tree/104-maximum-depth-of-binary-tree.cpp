@@ -11,25 +11,10 @@
  */
 class Solution {
 public:
-    void maxDep( TreeNode*r,int &h,int &max ){
-        if( r->right==nullptr and r->left==nullptr ){
-            max = max>h?max:h;
-            return;
-        }
-        if( r->left ){
-            int k =h+1;
-            maxDep(r->left,k,max);
-        }
-        if(r->right){
-            int k =h+1;
-            maxDep(r->right,k,max);
-        }
-    }
     int maxDepth(TreeNode* root) {
-        int h=1;
-        int max = 1;
-        if( root==nullptr )return 0;
-        maxDep(root,h,max);
-        return max;
+        if( root==NULL)return 0;
+        int lh = maxDepth(root->left);
+        int rh = maxDepth(root->right);
+        return 1+max(lh,rh);
     }
 };
