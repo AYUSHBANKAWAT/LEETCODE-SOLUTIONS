@@ -15,8 +15,6 @@ public:
         if( p==nullptr and q==nullptr  )return true;
         else if( p==nullptr or q==nullptr)return false;
         else if( p->val!=q->val )return false;
-        bool b1=isSameTree(p->left,q->left);
-        bool b2=isSameTree(p->right,q->right);
-        return b1 and b2;
+        return isSameTree(p->left,q->left) and isSameTree(p->right,q->right);
     }
 };
