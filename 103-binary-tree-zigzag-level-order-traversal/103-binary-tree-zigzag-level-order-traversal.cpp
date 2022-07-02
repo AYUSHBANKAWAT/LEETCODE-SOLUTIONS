@@ -17,19 +17,21 @@ public:
         queue<TreeNode*>q;
         q.push(root);
         int k=1;
+        bool leftToright=true;
         while( !q.empty() ){
             int size = q.size();
-            vector<int>temp;
+            vector<int>temp(size);
             for( int i=0;i<size;i++ ){
+                int index = leftToright?i:size-1-i;
                 auto d = q.front();
                 q.pop();
-                temp.push_back( d->val );
+                temp[index]=d->val;
                 if( d->left )q.push(d->left);
                 if( d->right )q.push(d->right);
             }
-            if( k%2==0 )reverse( temp.begin(),temp.end() );
+            leftToright=!leftToright;
             ans.push_back(temp);
-            k++;
+            
         }
         return ans;
     }
