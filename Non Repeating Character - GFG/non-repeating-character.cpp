@@ -11,7 +11,6 @@ class Solution
     //Function to find the first non-repeating character in a string.
     char nonrepeatingCharacter(string S)
     {
-       string t =S;
        vector<int>m(26,0);
        for( auto a:S )m[a-'a']++;
        for( auto a:S ){
