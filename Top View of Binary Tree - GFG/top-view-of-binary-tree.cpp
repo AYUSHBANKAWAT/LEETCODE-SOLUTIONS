@@ -108,14 +108,14 @@ class Solution
     {
         queue<pair<Node*,int>>q;
         q.push( {root,0} );
-        map<int,Node*>mp;
+        map<int,int>mp;
         while( !q.empty() ){
             auto k =q.front();
             q.pop();
             Node*t =k.first;
             int x =k.second;
             if( mp.find(x)==mp.end() ){
-                mp[x]=t;
+                mp[x]=t->data;
             }
             if( t->left ){
                 q.push( {t->left,x-1} );
@@ -126,7 +126,7 @@ class Solution
         }
         vector<int>ans;
         for( auto a:mp ){
-            ans.push_back( a.second->data );
+            ans.push_back( a.second );
         }
         return ans;
     }
