@@ -11,26 +11,16 @@
  */
 class Solution {
 public:
+    void solve( TreeNode*r,vector<int>&t,int level ){
+        if( r==nullptr )return;
+        if( level==t.size() )t.push_back(r->val);
+        solve( r->right,t,level+1 );
+        solve(r->left,t,level+1);
+    }
     vector<int> rightSideView(TreeNode* root) {
-        vector<int>ans;
-        if( root==nullptr )return ans;
-        queue<pair<TreeNode*,int>>q;
-        map<int,int>mp;
-        q.push( {root,0} );
-        while(!q.empty() ){
-            auto t =q.front();
-            q.pop();
-            int k =t.second;
-            TreeNode* node=t.first;
-            mp[k]=node->val;
-            if( node->left )q.push({node->left,k+1});
-            if( node->right )q.push({node->right,k+1});
-        }
         
-        for( auto t : mp ){
-            ans.push_back(t.second);
-        }
+       vector<int>ans; 
+       solve(root,ans,0);
         return ans;
-        
     }
 };
