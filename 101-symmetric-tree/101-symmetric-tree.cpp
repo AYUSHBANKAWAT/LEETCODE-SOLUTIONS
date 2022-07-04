@@ -12,7 +12,7 @@
 class Solution {
 public:
     void chk( TreeNode* left,TreeNode*right,bool &b ){
-        if(!b)return;
+       
         if( !left and !right  )return;
         if( !left or !right  ){
             b=false;
@@ -22,8 +22,9 @@ public:
             b=false;
             return;
         }
+        if( b ){
         chk(left->left,right->right,b);
-        chk(left->right,right->left,b); 
+        chk(left->right,right->left,b); }
     }
     bool isSymmetric(TreeNode* root) {
        // if( !root )return false;
