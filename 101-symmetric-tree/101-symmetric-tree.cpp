@@ -12,7 +12,8 @@
 class Solution {
 public:
     void chk( TreeNode* left,TreeNode*right,bool &b ){
-        if( !left and !right )return;
+        if(!b)return;
+        if( !left and !right  )return;
         if( !left or !right  ){
             b=false;
             return;
