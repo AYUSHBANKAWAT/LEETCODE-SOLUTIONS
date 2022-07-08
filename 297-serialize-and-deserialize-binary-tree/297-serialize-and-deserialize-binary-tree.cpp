@@ -36,7 +36,6 @@ public:
         stringstream s(data);
         string str;
         getline(s,str,',');
-        
         queue<TreeNode*>q;
         TreeNode* y = new TreeNode(stoi(str));
         q.push(y);
