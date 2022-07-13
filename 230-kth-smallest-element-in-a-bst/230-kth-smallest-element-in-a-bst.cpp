@@ -31,8 +31,8 @@ public:
                 }
             }
         }
-        for( auto a:ans )cout<<a<<" ";
-        cout<<endl;
+        // for( auto a:ans )cout<<a<<" ";
+        // cout<<endl;
         return ans[k-1];
     }
 };
