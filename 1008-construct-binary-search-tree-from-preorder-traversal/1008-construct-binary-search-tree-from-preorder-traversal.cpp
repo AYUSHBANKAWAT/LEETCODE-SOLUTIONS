@@ -11,29 +11,27 @@
  */
 class Solution {
 public:
-    TreeNode* bstFromPreorder(vector<int>& preorder) {
-        TreeNode*root = new TreeNode(preorder[0]);
-        for( int i=1;i<preorder.size();i++ ){
-            //TreeNode * t = new TreeNode(preorder[i]);
-            TreeNode * p=root;
-            int val = preorder[i];
-            while( p ){
-                if( p->val >val  ){
-                    if(p->left)p=p->left;
-                    else {
-                        p->left = new TreeNode(val);
-                        break;
-                    }
-                }
-                if( p->val<val ){
-                    if(p->right )p=p->right;
-                    else{
-                        p->right = new TreeNode(val);
-                        break;
-                    }
-                }
-            }
+    
+    TreeNode* buildTree(vector<int>& preorder, vector<int>& inorder) {
+        map<int,int>mp;
+        for( int i=0;i<inorder.size();i++ ){
+            mp[inorder[i]]=i;
         }
+       return  generateTree(preorder,0,preorder.size()-1,inorder,0,inorder.size()-1,mp); 
+    }
+    TreeNode* generateTree( vector<int>preorder,int preStart,int preEnd,vector<int>inorder,int inStart,int inEnd,map<int,int>&mp){
+        if( preStart>preEnd or inStart>inEnd )return nullptr;
+        TreeNode * root = new TreeNode(preorder[preStart]);
+        int inroot = mp[root->val];
+        int numLeft = inroot-inStart;
+        root->left = generateTree(preorder,preStart+1,preStart+numLeft,inorder,inStart,inroot-1,mp);
+        root->right =  generateTree(preorder,preStart+numLeft+1,preEnd,inorder,inroot+1,inEnd,mp);
         return root;
+    }
+    
+    TreeNode* bstFromPreorder(vector<int>& preorder) {
+        vector<int>inorder=preorder;
+        sort( inorder.begin(),inorder.end() );
+        return buildTree(preorder,inorder);
     }
 };
