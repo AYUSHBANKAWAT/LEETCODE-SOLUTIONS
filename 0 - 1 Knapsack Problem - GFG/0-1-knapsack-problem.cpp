@@ -8,26 +8,45 @@ class Solution
 {
     public:
     //Function to return max value that can be put in knapsack of capacity W.
-    int knapSack(int W, int wt[], int val[], int n) 
-    { 
-      vector<vector<int>>dp(n+1,vector<int>(W+1));
-    //   for( int i=0;i<=n;i++ ){
-    //       for( int j=0;j<=W;j++ ){
-    //           if( i==0 )dp[i][j]=0;
-    //           if( j==0 )dp[i][j]=1;
+    
+    int knapSackd(int W, int wt[], int val[], int n,int ** dp) {
+        if(n<0 or W<0 )return 0;
+        if( dp[n][W]!=-1 )return dp[n][W];
+        else if( wt[n]<=W ){
+            dp[n][W]= max(val[n]+knapSackd( W-wt[n],wt,val,n-1,dp),knapSackd( W,wt,val,n-1,dp));
+        }
+        else dp[n][W]= knapSackd( W,wt,val,n-1,dp);
+        return dp[n][W];
+    }
+    
+    int knapSack(int W, int wt[], int val[], int n) {
+         int** dp;
+         dp = new int*[n];
+         for (int i = 0; i < n; i++)
+         dp[i] = new int[W + 1];
+         
+         for (int i = 0; i < n; i++)
+         for (int j = 0; j < W + 1; j++)
+            dp[i][j] = -1;
+         
+         knapSackd(W,wt,val,n-1,dp);
+         return dp[n-1][W];
+    }
+    
+    // int knapSack(int W, int wt[], int val[], int n) 
+    // { 
+    //   vector<vector<int>>dp(n+1,vector<int>(W+1));
+    //   int sum=0;
+    //   for( int i=1;i<=n;i++ ){
+    //       for( int j=1;j<=W;j++ ){
+    //           if( wt[i-1]<=j ){
+    //             dp[i][j]=max( val[i-1]+dp[i-1][j-wt[i-1]],dp[i-1][j] ); 
+    //           }
+    //           else dp[i][j]=dp[i-1][j];
     //       }
     //   }
-      int sum=0;
-      for( int i=1;i<=n;i++ ){
-          for( int j=1;j<=W;j++ ){
-              if( wt[i-1]<=j ){
-                dp[i][j]=max( val[i-1]+dp[i-1][j-wt[i-1]],dp[i-1][j] ); 
-              }
-              else dp[i][j]=dp[i-1][j];
-          }
-      }
-      return dp[n][W];
-    }
+    //   return dp[n][W];
+    // }
 };
 
 //{ Driver Code Starts.
