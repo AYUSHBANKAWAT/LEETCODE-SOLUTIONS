@@ -6,72 +6,32 @@ using namespace std;
 // } Driver Code Ends
 class Solution {
   public:
-    static bool cmp(pair<int, int>& a,pair<int, int>& b){
-        return a.second > b.second;
-    }     
-    
-    int totalFruits(int N, vector<int> &nums) {
-        int k =nums[0];
-        if(nums.size()==1)return 1;
-        int i;
-        map<int,int>mp;
-        for(  i=0;i<nums.size();i++ ){
-            mp[nums[i]]++;
-            if( k!=nums[i] )break;
-        }
-        if( i>=nums.size() )return mp[nums[0]];
-        int maxi=mp[nums[0]]+1;
-        i++;
-        //cout<<maxi<<endl;
-        int p=0;
-        int u=0;
-        while(i<nums.size()){
-           if( mp.find(nums[i])!=mp.end()){
-               mp[nums[i]]++;
-               if( mp.size()>=3 ){
-                    mp[nums[p]]--;
-                    if( mp[nums[p]]<=0 ){
-                   mp.erase(nums[p]);
-                   }
-                   p++;
-               }
-           }
-           else{
-             //  cout<<"check";
-               mp[nums[i]]++;
-              // cout<<mp[nums[p]];
-               mp[nums[p]]--;
-              // cout<<mp[nums[p]]<<endl;
-               if( mp[nums[p]]<=0 ){
-                   mp.erase(nums[p]);
-                   }
-               p++;
-              // cout<<" p"<<p<<endl;
-           }
-           int sum =0;
-           int cnt=0;
-          int fe=0;
-          int me=0;
-           for( auto itr = mp.begin();itr!=mp.end() ;++itr ){
-               if( fe<itr->second ){
-               sum=itr->second;
-               fe=sum;
-               me = itr->first;}
+    int totalFruits(int N, vector<int> &f) {
+        vector<int>b( 2,0 );
+        int type1=-1;
+        int type2=-1;
+        int ans=0;
+        for( int i=0;i<N;i++ ){
+            if( type1==-1 || type1==f[i] ){
+                type1=f[i];
+                b[0]++;
+            }else if( type2==-1 || type2==f[i] ){
+                type2=f[i];
+                b[1]++;
+            }else{
+                ans = max( ans,b[0]+b[1] );
+                int pre = i-1;
+                while( pre>=0 and f[pre]==f[i-1] )pre--;
+                type1 = f[i-1];
+                b[0]=i-pre-1;
+                type2=f[i];
+                b[1]=1;
             }
-            fe=0;
-            int h=0;
-            for( auto itr = mp.begin();itr!=mp.end() ;++itr ){
-               if( me!=itr->first and  fe<itr->second ){
-               h=itr->second;
-               fe=h;}
-               //me = itr->first;
-           }
-           sum=sum+h;
-           maxi = sum>maxi?sum:maxi;
-           i++;
-       
+            
         }
-        return maxi;
+        ans = max(ans,b[0]+b[1]);
+        return ans;
+        
     }
 };
 
