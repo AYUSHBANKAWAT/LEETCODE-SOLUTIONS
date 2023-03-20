@@ -25,7 +25,7 @@ class Solution{
 	   ans %= mod;
 	   if (arr[pos] <= sum)
 	        ans += fun(pos + 1, sum - arr[pos], arr), ans %= mod;
-	   return  dp[pos][sum]=ans;    
+	   return  ans;    
 	   
 	       
 	}
