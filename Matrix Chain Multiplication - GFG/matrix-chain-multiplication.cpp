@@ -9,22 +9,29 @@ using namespace std;
 
 class Solution{
 public:
-    int f(int N,int arr[] ,int start,int end,vector<vector<int>>&dp ){
-        if( start==end )return 0;
-        if( dp[start][end]!=-1 )return dp[start][end];
-        int k = INT_MAX;
-        
-        for( int i = start;i<end;i++ ){
-            int t= f( N,arr,start,i,dp )+f( N,arr,i+1,end,dp )+arr[start-1]*arr[i]*arr[end];
-            k=min(t,k);
-        }
-        return dp[start][end]=k;
-    }
     int matrixMultiplication(int N, int arr[])
     {
-        vector<vector<int>>dp( N+1,vector<int>(N+1,-1) );
-        return f( N,arr,1,N-1,dp );
-        
+        vector<vector<int>>dp( N,vector<int>(N,-1) );
+        for( int i=0;i<N;i++ ){
+            dp[i][i]=0;
+        }
+        for( int i=N-1;i>0;i-- ){
+            for( int j =i+1;j<N;j++ ){
+                int kt  = INT_MAX;
+                for( int k = i;k<j;k++ ){
+                    int d= arr[i-1]*arr[k]*arr[j]+dp[i][k]+dp[k+1][j];
+                    kt = min( kt,d );
+                }
+                dp[i][j] = kt;
+            }
+        }
+        // for( int i=0;i<N;i++ ){
+        //     for( int j=0;j<N;j++ ){
+        //         cout<<dp[i][j]<<" ";
+        //     }
+        //     cout<<endl;
+        // }
+        return dp[1][N-1];
     }
 };
 
