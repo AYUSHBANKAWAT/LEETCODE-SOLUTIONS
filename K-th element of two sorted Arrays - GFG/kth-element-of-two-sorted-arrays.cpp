@@ -1,40 +1,47 @@
-// { Driver Code Starts
+//{ Driver Code Starts
 #include <bits/stdc++.h>
 using namespace std;
 
 
- // } Driver Code Ends
+// } Driver Code Ends
 class Solution{
     public:
     int kthElement(int arr1[], int arr2[], int n, int m, int k)
     {
-        if( n>m){
-            return  kthElement(arr2,arr1,m,n,k);
-        }
-        //assuming taking something from array1
-        int left = max(0,k-m);
-        //
-        int right = min(k,n);
-        while( left<=right){
-            int cut1 = (left+right)>>1;
-            int cut2 = k-cut1;
-            int left1 = cut1==0?INT_MIN:arr1[cut1-1];
-            int left2 = cut2==0?INT_MIN:arr2[cut2-1];
-            int right1 = cut1==n?INT_MAX:arr1[cut1];
-            int right2 = cut2==m?INT_MAX:arr2[cut2];
-            if( left1<=right2 && left2<=right1 ){
-                return max(left1,left2);
+      //  if( arr1[0]>arr2[0] )return kthElement(arr1,arr2,n,m,k);
+        int i=0;
+        int j=0;
+        int k1=0;
+       // k--;
+       int ans =0;
+        while( k1!=k and i<n and j<m ){
+            if( arr1[i]<arr2[j] ){
+                ans=arr1[i];
+                i++;
+                //ans=arr1[i];
             }
-            else if( left1>right2)
-            right=cut1-1;
-            else if( left2>right1)
-            left = cut1+1; 
+            else {
+                ans=arr2[j];
+                j++;
+            }
+            k1++;
         }
-        return 1;
+        while( k1!=k and i<n ){
+            k1++;
+            ans=arr1[i];
+            i++;
+        }
+        while( k1!=k and j<m ){
+            k1++;
+            ans=arr2[j];
+            j++;
+        }
+      //  cout<<i<<" "<<j<<endl;
+        return ans;
     }
 };
 
-// { Driver Code Starts.
+//{ Driver Code Starts.
  
 // Driver code
 int main()
@@ -54,4 +61,5 @@ int main()
         cout << ob.kthElement(arr1, arr2, n, m, k)<<endl;
 	}
     return 0;
-}  // } Driver Code Ends
+}
+// } Driver Code Ends
