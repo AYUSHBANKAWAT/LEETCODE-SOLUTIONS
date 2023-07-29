@@ -19,7 +19,6 @@ public:
             if( temp!=arr[i] ){
                 temp =arr[i];
                 arr[cnt]=arr[i];
-                li = i;
                 cnt++;
             }else{
                 i++;
