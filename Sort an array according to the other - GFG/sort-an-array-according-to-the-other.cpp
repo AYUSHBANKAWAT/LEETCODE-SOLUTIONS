@@ -17,30 +17,31 @@ class Solution{
     // M : size of the array A2[]
     
     //Function to sort an array according to the other array.
-    vector<int> sortA1ByA2(vector<int> A1, int n, vector<int> A2, int m) 
+    vector<int> sortA1ByA2(vector<int> A1, int N, vector<int> A2, int M) 
     {
         map<int,int>mp;
-        for( int i=0;i<m;i++ ){
-            mp[A2[i]]=i+1;
-        }
-        vector<pair<int,int>>tab1;
-        vector<int>tab2;
-        for( int i=0;i<n;i++ ){
-            if( mp.find(A1[i])!=mp.end())
-            tab1.push_back({mp[A1[i]],A1[i]});
-            else tab2.push_back(A1[i]);
-        }
-        sort(tab1.begin(),tab1.end());
-        sort(tab2.begin(),tab2.end());
+        for( int i=0;i<N;i++ )mp[A1[i]]++;
         vector<int>ans;
-        for( int i=0;i<tab1.size();i++ ){
-            ans.push_back(tab1[i].second);
+        for( int i=0;i<M;i++ ){
+            int k = A2[i];
+            int l = mp[A2[i]];
+            for( int j=0;j<l;j++ ){
+                ans.push_back(k);
+            }
+            mp.erase( A2[i] );
         }
-        for( int i=0;i<tab2.size();i++ ){
-            ans.push_back(tab2[i]);
+        auto itr = mp.begin(); 
+        while( !mp.empty() ){
+            int k = itr->first;
+            int l = itr->second;
+            for( int j=0;j<l;j++ ){
+                ans.push_back(k);
+            }
+            itr++;
+            mp.erase(k);
+            
         }
         return ans;
-        
     } 
 };
 
