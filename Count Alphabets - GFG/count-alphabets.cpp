@@ -21,7 +21,8 @@ return 0;
 
 int Count(string S){
     int cnt=0;
-    for( auto a:S ){
+    for( int i=0;i<S.size();i++ ){
+        char a = S[i];
         if( (a>='a' and a<='z') or (a>='A' and a<='Z') )cnt++;
     }
     return cnt;
